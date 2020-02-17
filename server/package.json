@@ -4,12 +4,12 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "dev": "nodemon ./index.js",
+    "start": "nodemon ./index.js",
     "test": "jest",
     "lint": "eslint ./src"
   },
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=12.0.0"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,8 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-security": "^1.4.0",
     "jest": "^25.1.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
   },
   "dependencies": {
     "express": "^4.17.1"
