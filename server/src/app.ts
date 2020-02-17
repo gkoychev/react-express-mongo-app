@@ -1,12 +1,12 @@
 import express from "express";
-import initMongo from "./configs/mongoose";
+import initMongoose from "./configs/mongoose";
 import initRoutes from "./routes";
 
 const app = express();
 const port = process.env.PORT || "8000";
 
 const startServer = async () => {
-  await initMongo();
+  await initMongoose();
   initRoutes(app);
 
   app.listen(port, () => {

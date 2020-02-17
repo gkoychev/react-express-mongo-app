@@ -1,8 +1,12 @@
 import mongoose from "mongoose";
 
+// init schemas
+import "../models/User";
+import "../models/Post";
+
 export default async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017", {
+    await mongoose.connect("mongodb://localhost:27017/test", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       connectTimeoutMS: 3000
