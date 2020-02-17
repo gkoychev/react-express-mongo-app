@@ -3,6 +3,7 @@ volumes:
     mongo_data:
 services:
     server:
+        build: ./server
         restart: unless-stopped
         image: server:latest
         ports:
@@ -16,6 +17,7 @@ services:
         stdin_open: true
 
     client:
+        build: ./client
         restart: unless-stopped
         image: client:latest
         ports:
