@@ -1,5 +1,11 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 
 export default {
-  monogURI: process.env.MONGODB_URI
+  port: process.env.PORT || "8000",
+  monogURI: process.env.MONGODB_URI,
+
+  // API configs
+  api: {
+    prefix: "/api"
+  }
 };
