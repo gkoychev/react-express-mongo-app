@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     padding: 10
   },
   header: {
+    marginLeft: 10,
     marginBottom: 10
   }
 });

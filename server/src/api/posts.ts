@@ -13,7 +13,10 @@ export default (router: Router) => {
 
         const pageData = await PostService.getPage(+page, +limit);
 
-        res.json(pageData);
+        // for testing
+        setTimeout(() => {
+          res.json(pageData);
+        }, 500);
       } catch (err) {
         next(err);
       }
