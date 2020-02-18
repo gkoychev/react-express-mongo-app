@@ -7,9 +7,9 @@ import "../models/Post";
 export default async () => {
   try {
     await mongoose.connect("mongodb://localhost:27017/test", {
+      //todo: get from config
       useNewUrlParser: true,
-      useUnifiedTopology: true,
-      connectTimeoutMS: 3000
+      useUnifiedTopology: true
     });
     return mongoose.connection;
   } catch (error) {

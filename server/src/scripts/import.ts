@@ -6,8 +6,8 @@ import initMongoose from "../configs/mongoose";
 async function start() {
   const db = await initMongoose();
   // get refs to the models we defined above
-  var User = mongoose.model("User");
-  var Post = mongoose.model("Post");
+  const User = mongoose.model("User");
+  const Post = mongoose.model("Post");
 
   // fetch external data
   const users = await (
@@ -31,7 +31,6 @@ async function start() {
 
   // import Posts
   for (const postData of posts) {
-    console.log(postData);
     const post = new Post({ postId: postData.id, ...postData });
     const user = await User.findOne({ userId: postData.userId });
     post.set("_userId", user && user.id);

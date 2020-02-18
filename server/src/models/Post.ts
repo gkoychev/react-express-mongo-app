@@ -1,9 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const postSchema = new Schema({
-  postId: Number,
-  // userId: Number,
   _userId: Schema.Types.ObjectId,
+
+  postId: Number,
+  userId: Number,
   title: String,
   body: String
 });
