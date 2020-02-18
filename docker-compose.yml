@@ -6,13 +6,15 @@ services:
     build: ./server
     restart: unless-stopped
     image: server:latest
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/test
     ports:
       - 8000:8000
     volumes:
       - ./server:/user/src/app
     links:
       - mongo
-    command: yarn start
+    command: bash -c "yarn run import && yarn start"
     tty: true
     stdin_open: true
 
@@ -27,8 +29,8 @@ services:
     links:
       - server
     command: yarn start
-    tty: true
-    stdin_open: true
+    # tty: true
+    # stdin_open: true
 
   mongo:
     restart: unless-stopped

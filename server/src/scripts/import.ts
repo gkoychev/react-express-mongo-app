@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import mongoose from "mongoose";
 
-import initMongoose from "../configs/mongoose";
+import initMongoose from "../initializers/mongoose";
 
 async function start() {
   const db = await initMongoose();

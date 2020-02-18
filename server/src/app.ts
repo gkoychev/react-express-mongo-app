@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import initMongoose from "./configs/mongoose";
+import initMongoose from "./initializers/mongoose";
 import api from "./api";
 
 const app = express();
