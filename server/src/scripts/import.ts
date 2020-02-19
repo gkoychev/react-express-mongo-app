@@ -23,8 +23,8 @@ async function start() {
 
   // import Users
   await Promise.all(
-    users.map(async (userData: any) => {
-      const user = new User({ userId: userData.id, ...userData });
+    users.map(async (UserDataType: any) => {
+      const user = new User({ userId: UserDataType.id, ...UserDataType });
       await user.save();
     })
   );

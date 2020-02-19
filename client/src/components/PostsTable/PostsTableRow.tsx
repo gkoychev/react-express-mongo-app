@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { TableRow, TableCell, makeStyles } from "@material-ui/core";
-import { Post } from "../../interfaces";
+import { PostDataType } from "../../interfaces";
 
 interface Props {
   onClick?: (id: number) => void;
-  data: Post;
+  data: PostDataType;
 }
 
 const useStyles = makeStyles({

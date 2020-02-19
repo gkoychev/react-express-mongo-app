@@ -6,8 +6,12 @@ import { Typography, LinearProgress } from "@material-ui/core";
 
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { RootState } from "../../redux/reducers";
-import { getPostById, getUser, getUserIsLoading } from "../../redux/selectors";
-import { Post as PostType } from "../../interfaces";
+import {
+  getPostById,
+  getUserData,
+  getUserIsLoading
+} from "../../redux/selectors";
+import { PostDataType, UserDataType } from "../../interfaces";
 import { fetchUser } from "../../redux/actions/usersActions";
 import UserAvatar from "../../components/UserAvatar";
 
@@ -30,13 +34,14 @@ const useStyles = makeStyles({
   }
 });
 
-interface Props extends PostType {
+interface Props extends PostDataType {
   fetchUser: Function;
 
   match: match<{
     postId?: string;
   }>;
 
+  user?: UserDataType;
   postNotFound: boolean;
   userIsloading: boolean;
 }
@@ -44,6 +49,7 @@ interface Props extends PostType {
 const Post = ({
   body,
   title,
+  user,
   postNotFound,
   userIsloading,
   fetchUser,
@@ -66,9 +72,9 @@ const Post = ({
       <Breadcrumbs />
       <div className={classes.wrapper}>
         {userIsloading && <LinearProgress />}
-        {!userIsloading && (
+        {!userIsloading && user && (
           <div>
-            <UserAvatar className={classes.avatar} />
+            <UserAvatar className={classes.avatar} user={user} />
             <Typography variant="h5" className={classes.header}>
               {title}
             </Typography>
@@ -83,7 +89,7 @@ const Post = ({
 const mapStateToProps = (state: RootState, { match: { params } }: any) => {
   const postId = params.postId;
   const post = getPostById(state, postId);
-  const user = getUser(state);
+  const user = getUserData(state);
   const userIsloading = getUserIsLoading(state);
 
   return { ...post, user, userIsloading, postNotFound: !post };

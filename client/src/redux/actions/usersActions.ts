@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 import { getUserUrl } from "../../utils/apiUtils";
-import { UserResponse } from "../../interfaces";
+import { UserDataType } from "../../interfaces";
 
 export const fetchUserStarted = createAction("user/fetch/started");
 export const fetchUserSucceeded = createAction<any>("user/fetch/succeeded");
@@ -12,7 +12,7 @@ export const fetchUser = (id: number) => (dispatch: any) => {
   return fetch(getUserUrl(id))
     .then(res => res.json())
     .then(
-      (data: UserResponse) => dispatch(fetchUserSucceeded(data)),
+      (data: UserDataType) => dispatch(fetchUserSucceeded(data)),
       (error: Error) => dispatch(fetchUserFailed(error))
     );
 };

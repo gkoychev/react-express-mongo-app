@@ -1,20 +1,20 @@
-export interface Post {
+export interface PostDataType {
   postId: number;
   userId: number;
   title: string;
   body: string;
 }
 
-export interface PostsArray extends Array<Post> {}
+export interface PostsArray extends Array<PostDataType> {}
 
 export interface PostsResponse {
   currentPage: number;
   pages: number;
   total: number;
-  posts: Array<Post>;
+  posts: Array<PostDataType>;
 }
 
-export interface UserResponse {
+export interface UserDataType {
   address: any;
   company: any;
   userId: number;

@@ -3,7 +3,8 @@ import { createReducer, AnyAction } from "@reduxjs/toolkit";
 const initialState = {
   ready: false,
   loading: false,
-  error: null
+  error: undefined,
+  data: undefined
 };
 export type UserState = typeof initialState;
 
@@ -21,6 +22,6 @@ export default createReducer(initialState, {
   },
 
   "user/fetch/succeeded": (state: UserState, { payload }: AnyAction) => {
-    return { ...state, ...payload, ready: true, loading: false };
+    return { ...state, data: payload, ready: true, loading: false };
   }
 });
