@@ -13,6 +13,7 @@ import { Alert, Pagination } from "@material-ui/lab";
 import { getPostsUrl, fetcher } from "../../utils/apiUtils";
 import { LinearProgress } from "@material-ui/core";
 import PostsTableRow from "./PostsTableRow";
+import history from "../../utils/history";
 
 const useStyles = makeStyles({
   table: {
@@ -24,8 +25,11 @@ const PostsTable = () => {
   const classes = useStyles();
   const [page, setPage] = useState(1);
 
-  const handleChange = (e: any, value: any) => {
+  const handleChange = (_e: Event, value: number) => {
     setPage(value);
+  };
+  const handleRowClick = (id: number) => {
+    history.push(`/post/${id}`);
   };
 
   const { data, error } = useSWR(getPostsUrl({ page, limit: 10 }), fetcher);
@@ -47,19 +51,23 @@ const PostsTable = () => {
         </TableHead>
         <TableBody>
           {posts.map((post: any) => (
-            <PostsTableRow data={post} />
-          ))}
-        </TableBody>
-        <TableRow>
-          <TableCell colSpan={3}>
-            <Pagination
-              page={page}
-              count={10}
-              shape="rounded"
-              onChange={handleChange}
+            <PostsTableRow
+              key={post.postId}
+              data={post}
+              onClick={handleRowClick}
             />
-          </TableCell>
-        </TableRow>
+          ))}
+          <TableRow>
+            <TableCell colSpan={3}>
+              <Pagination
+                page={page}
+                count={10}
+                shape="rounded"
+                onChange={handleChange}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
     </TableContainer>
   );

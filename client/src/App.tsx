@@ -1,9 +1,12 @@
 import React from "react";
+import { Router } from "react-router";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Container, Typography, Paper } from "@material-ui/core";
+import { Container, Paper } from "@material-ui/core";
 
-import PostsTable from "./components/PostsTable";
+import Routes from "./routes";
+import history from "./utils/history";
 
 const theme = createMuiTheme({
   palette: {
@@ -27,14 +30,13 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="md">
-        <Paper className={classes.app}>
-          <Typography variant="h5" className={classes.header}>
-            Blog Posts
-          </Typography>
-          <PostsTable />
-        </Paper>
-      </Container>
+      <Router history={history}>
+        <Container maxWidth="md">
+          <Paper className={classes.app}>
+            <Routes />
+          </Paper>
+        </Container>
+      </Router>
     </ThemeProvider>
   );
 }
