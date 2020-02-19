@@ -28,9 +28,9 @@ services:
       - ./client:/usr/src/app
     links:
       - server
-    command: yarn start
-    # tty: true
-    # stdin_open: true
+    command: bash -c "yarn && yarn start"
+    tty: true
+    stdin_open: true
 
   mongo:
     restart: unless-stopped
