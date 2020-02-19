@@ -1,10 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
 import { getPostsUrl } from "../../utils/apiUtils";
+import { PostsResponce } from "../../interfaces";
 
 export const postsSetPage = createAction<number>("posts/setPage");
 
-const fetchPostsStarted = createAction("posts/fetch/started");
-const fetchPostsSucceeded = createAction<PostsResponce>(
+export const fetchPostsStarted = createAction("posts/fetch/started");
+
+export const fetchPostsSucceeded = createAction<PostsResponce>(
   "posts/fetch/succeeded"
 );
 const fetchPostsFailed = createAction<Error>("posts/fetch/failed");
@@ -12,12 +14,6 @@ const fetchPostsFailed = createAction<Error>("posts/fetch/failed");
 interface FetchPostsParams {
   page: number;
   limit?: number;
-}
-interface PostsResponce {
-  currentPage: number;
-  pages: number;
-  total: number;
-  posts: Array<{ postId: number; userId: number; title: string; body: string }>;
 }
 export const fetchPosts = ({ page, limit = 10 }: FetchPostsParams) => (
   dispatch: any
