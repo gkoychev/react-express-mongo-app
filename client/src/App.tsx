@@ -17,6 +17,7 @@ const theme = createMuiTheme({
 
 const useStyles = makeStyles({
   app: {
+    position: "relative",
     marginTop: 20,
     padding: 10
   },
