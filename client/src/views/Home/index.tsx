@@ -9,6 +9,9 @@ import { RootState } from "../../redux/reducers";
 import { fetchPosts } from "../../redux/actions/postsActions";
 
 const useStyles = makeStyles({
+  wrapper: {
+    minHeight: 500
+  },
   header: {
     marginLeft: 10,
     marginBottom: 10
@@ -30,10 +33,12 @@ const Home = ({ fetchPosts, currentPage }: Props) => {
   return (
     <Fragment>
       <Breadcrumbs />
-      <Typography variant="h5" className={classes.header}>
-        Blog Posts
-      </Typography>
-      <PostsTable />
+      <div className={classes.wrapper}>
+        <Typography variant="h5" className={classes.header}>
+          Blog Posts
+        </Typography>
+        <PostsTable />
+      </div>
     </Fragment>
   );
 };

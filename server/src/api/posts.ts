@@ -13,7 +13,7 @@ export default (router: Router) => {
 
         const pageData = await PostService.getPage(+page, +limit);
 
-        // for testing
+        // setTimeout is not needed here it just to see loaders in Front-end
         setTimeout(() => {
           res.json(pageData);
         }, 500);

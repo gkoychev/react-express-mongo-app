@@ -6,7 +6,7 @@ const initialState = {
   posts: [],
   currentPage: 1,
   pages: 0,
-  error: false
+  error: null
 };
 export type PostsState = typeof initialState;
 
@@ -14,13 +14,19 @@ export default createReducer(initialState, {
   "posts/fetch/started": (state: PostsState) => {
     state.loading = true;
   },
+
   "posts/fetch/failed": (state: PostsState, action: AnyAction) => {
-    state.loading = false;
-    state.error = action?.error?.message || "something went wrong";
+    return {
+      ...state,
+      loading: false,
+      error: action?.error?.message || "something went wrong"
+    };
   },
+
   "posts/fetch/succeeded": (state: PostsState, { payload }: AnyAction) => {
     return { ...state, ...payload, ready: true, loading: false };
   },
+
   "posts/setPage": (state: PostsState, { payload }: AnyAction) => {
     state.currentPage = payload;
   }

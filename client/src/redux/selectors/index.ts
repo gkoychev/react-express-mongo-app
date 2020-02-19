@@ -13,3 +13,9 @@ export const getPostById = createSelector(
     return posts.find(post => String(post.postId) === id);
   }
 );
+
+export const getUser = (state: RootState) => state.user;
+export const getUserIsLoading = createSelector(
+  getUser,
+  user => user.loading || !user.ready
+);

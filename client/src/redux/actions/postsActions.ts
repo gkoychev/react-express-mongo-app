@@ -1,15 +1,15 @@
 import { createAction } from "@reduxjs/toolkit";
 import { getPostsUrl } from "../../utils/apiUtils";
-import { PostsResponce } from "../../interfaces";
+import { PostsResponse } from "../../interfaces";
 
 export const postsSetPage = createAction<number>("posts/setPage");
 
 export const fetchPostsStarted = createAction("posts/fetch/started");
 
-export const fetchPostsSucceeded = createAction<PostsResponce>(
+export const fetchPostsSucceeded = createAction<PostsResponse>(
   "posts/fetch/succeeded"
 );
-const fetchPostsFailed = createAction<Error>("posts/fetch/failed");
+export const fetchPostsFailed = createAction<Error>("posts/fetch/failed");
 
 interface FetchPostsParams {
   page: number;
@@ -23,7 +23,7 @@ export const fetchPosts = ({ page, limit = 10 }: FetchPostsParams) => (
   return fetch(getPostsUrl({ page, limit }))
     .then(res => res.json())
     .then(
-      (data: PostsResponce) => dispatch(fetchPostsSucceeded(data)),
+      (data: PostsResponse) => dispatch(fetchPostsSucceeded(data)),
       (error: Error) => dispatch(fetchPostsFailed(error))
     );
 };
