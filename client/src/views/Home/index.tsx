@@ -22,6 +22,7 @@ interface Props {
 
 const Home = ({ fetchPosts, currentPage }: Props) => {
   const classes = useStyles();
+
   useEffect(() => {
     fetchPosts({ page: currentPage });
   }, [fetchPosts, currentPage]);

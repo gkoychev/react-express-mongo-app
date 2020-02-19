@@ -5,7 +5,7 @@ import { Typography } from "@material-ui/core";
 
 import Breadcrumbs from "../../components/Breadcrumbs";
 import { RootState } from "../../redux/reducers";
-import { withRouter, match } from "react-router-dom";
+import { withRouter, match, Redirect } from "react-router-dom";
 import { getPostById } from "../../redux/selectors";
 import { Post as PostType } from "../../interfaces";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   body: {
     marginLeft: 10,
-    minHeight: "100vh"
+    minHeight: 500
   }
 });
 
@@ -26,10 +26,15 @@ interface Params {
 }
 interface Props extends PostType {
   match: match<Params>;
+  postNotFound: boolean;
 }
 
-const Post = ({ body, title }: Props) => {
+const Post = ({ body, title, postNotFound }: Props) => {
   const classes = useStyles();
+
+  if (postNotFound) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Fragment>
@@ -46,7 +51,7 @@ const mapStateToProps = (state: RootState, { match: { params } }: any) => {
   const postId = params.postId;
   const post = getPostById(state, postId);
 
-  return { ...post };
+  return { ...post, postNotFound: !post };
 };
 
 export default withRouter(connect(mapStateToProps)(Post));
