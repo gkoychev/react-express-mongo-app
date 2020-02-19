@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import useSWR from "swr";
+import React from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { LinearProgress } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -10,10 +11,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Alert, Pagination } from "@material-ui/lab";
 
-import { getPostsUrl, fetcher } from "../../utils/apiUtils";
-import { LinearProgress } from "@material-ui/core";
 import PostsTableRow from "./PostsTableRow";
 import history from "../../utils/history";
+import { postsSetPage } from "../../redux/actions/postsActions";
+import { PostsState } from "../../redux/reducers/posts";
+import { RootState } from "../../redux/reducers";
 
 const useStyles = makeStyles({
   table: {
@@ -21,23 +23,30 @@ const useStyles = makeStyles({
   }
 });
 
-const PostsTable = () => {
+interface Type extends PostsState {
+  postsSetPage: Function;
+}
+const PostsTable = ({
+  postsSetPage,
+  currentPage,
+  pages,
+  error,
+  posts,
+  ready,
+  loading
+}: Type) => {
   const classes = useStyles();
-  const [page, setPage] = useState(1);
 
   const handleChange = (_e: Event, value: number) => {
-    setPage(value);
+    postsSetPage(value);
   };
+
   const handleRowClick = (id: number) => {
     history.push(`/post/${id}`);
   };
 
-  const { data, error } = useSWR(getPostsUrl({ page, limit: 10 }), fetcher);
-
   if (error) return <Alert severity="error">Failed to load data</Alert>;
-  if (!data) return <LinearProgress />;
-
-  const posts = data?.posts || [];
+  if (!ready || loading) return <LinearProgress />;
 
   return (
     <TableContainer component={Paper}>
@@ -60,8 +69,8 @@ const PostsTable = () => {
           <TableRow>
             <TableCell colSpan={3}>
               <Pagination
-                page={page}
-                count={10}
+                page={currentPage}
+                count={pages}
                 shape="rounded"
                 onChange={handleChange}
               />
@@ -73,4 +82,10 @@ const PostsTable = () => {
   );
 };
 
-export default PostsTable;
+const mapStateToProps = ({ posts }: RootState) => {
+  return posts;
+};
+
+export default connect(mapStateToProps, {
+  postsSetPage
+})(PostsTable);

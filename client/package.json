@@ -21,7 +21,6 @@
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
-    "swr": "^0.1.17",
     "typescript": "^3.7.5"
   },
   "scripts": {

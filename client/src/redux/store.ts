@@ -1,15 +1,12 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
-import posts from "./reducers/posts";
+import rootReducer from "./reducers";
 
 const middleware = [...getDefaultMiddleware(), logger];
-const reducer = {
-  posts
-};
 
 const store = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware,
   devTools: process.env.NODE_ENV !== "production"
 });
