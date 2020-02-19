@@ -4,8 +4,10 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+RUN yarn global add react-scripts
+
 RUN yarn
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD ["yarn", "start"]
