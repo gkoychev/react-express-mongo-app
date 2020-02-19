@@ -21,7 +21,6 @@ export default () => {
       <Typography variant="h5" className={classes.header}>
         Blog Posts
       </Typography>
-
       <PostsTable />
     </Fragment>
   );
